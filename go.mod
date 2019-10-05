@@ -1,4 +1,4 @@
-module xaws
+module github.com/jdwheels/xaws
 
 go 1.13
 
