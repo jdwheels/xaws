@@ -19,6 +19,7 @@ func AutoScaleIt(name string, desiredCapacity int64) (result *autoscaling.Update
 
 	if err := req.Send(); err != nil {
 		LogAwsError(err)
+		return nil, err
 	} else {
 		log.Printf(`Auto scaling group "%s" scaling instances to "%d"...`, name, desiredCapacity)
 		result = res

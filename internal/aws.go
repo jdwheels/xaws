@@ -23,9 +23,9 @@ func GetSession() *session.Session {
 }
 
 func LogAwsError(err error) {
-	switch err := err.(type) {
+	switch x := err.(type) {
 	case awserr.Error:
-		log.Printf("AWS error (%s): '%s'", err.Code(), err.Message())
+		log.Printf("AWS error (%s): '%s'", x.Code(), x.Message())
 		break
 	default:
 		log.Printf("Error: '%s'", err.Error())
