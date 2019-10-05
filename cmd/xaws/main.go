@@ -1,6 +1,6 @@
 package main
 
-import "xaws/pkg/ec2"
+import "github.com/jdwheels/xaws/pkg/ec2"
 
 func main() {
 	//instanceId := "i-033427252766d6858"

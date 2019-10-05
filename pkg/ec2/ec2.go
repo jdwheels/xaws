@@ -3,8 +3,8 @@ package ec2
 import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/autoscaling"
+	"github.com/jdwheels/xaws/internal"
 	"log"
-	"xaws/internal"
 )
 
 func CheckIt(name string) (err error) {
