@@ -15,7 +15,7 @@ func StopEC2Cluster(asgName string) bool {
 
 func ChangeCapacity(asgName string, capacity int64) bool {
 	_, err := internal.AutoScaleIt(asgName, capacity)
-	res := err != nil
+	res := err == nil
 	log.Printf("Success %t", res)
 	return res
 }
