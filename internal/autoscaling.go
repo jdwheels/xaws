@@ -24,7 +24,7 @@ func AutoScaleIt(name string, desiredCapacity int64) (result *autoscaling.Update
 		result = res
 	}
 
-	return
+	return result, err
 }
 
 func CheckIt(name string) (err error) {
@@ -39,5 +39,5 @@ func CheckIt(name string) (err error) {
 		LogAwsError(err)
 	}
 
-	return
+	return err
 }
