@@ -13,7 +13,7 @@ func StopEC2Cluster(asgName string) bool {
 	return ChangeCapacity(asgName, 0)
 }
 
-func CheckIt(asgName string) (int, string, error)  {
+func CheckIt(asgName string) (int, string, error) {
 	return internal.CheckIt(asgName)
 }
 
