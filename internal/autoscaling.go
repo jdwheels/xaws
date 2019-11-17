@@ -3,6 +3,7 @@ package internal
 import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/autoscaling"
+	"github.com/aws/aws-sdk-go/service/ec2"
 	"log"
 )
 
@@ -45,6 +46,9 @@ func CheckIt(name string) (count int, status string, err error) {
 		count = len(x.Instances)
 		if count > 0 {
 			status = *x.Instances[0].LifecycleState
+			log.Printf("%+v", *x.Instances[0])
+		} else if *x.DesiredCapacity > 0 {
+			status = ec2.InstanceStateNamePending
 		}
 		break
 	}
