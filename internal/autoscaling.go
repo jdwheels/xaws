@@ -28,17 +28,26 @@ func AutoScaleIt(name string, desiredCapacity int64) (result *autoscaling.Update
 	return result, err
 }
 
-func CheckIt(name string) (err error) {
+func CheckIt(name string) (count int, status string, err error) {
 	autoscaleService := autoscaling.New(GetSession())
 
 	input := autoscaling.DescribeAutoScalingGroupsInput{
 		AutoScalingGroupNames: []*string{aws.String(name)},
 	}
 
-	log.Printf(`Waiting for auto scaling group "%s" to be in service...`, name)
-	if err := autoscaleService.WaitUntilGroupInService(&input); err != nil {
+	//log.Printf(`Waiting for auto scaling group "%s" to be in service...`, name)
+	res, err := autoscaleService.DescribeAutoScalingGroups(&input)
+	if err != nil {
 		LogAwsError(err)
 	}
 
-	return err
+	for _, x := range res.AutoScalingGroups {
+		count = len(x.Instances)
+		if count > 0 {
+			status = *x.Instances[0].LifecycleState
+		}
+		break
+	}
+
+	return
 }
