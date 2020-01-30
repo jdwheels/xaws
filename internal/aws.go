@@ -9,17 +9,13 @@ import (
 )
 
 func GetConfig() *aws.Config {
-	return &aws.Config{
-		Region: aws.String(endpoints.UsEast1RegionID),
-	}
+	config := aws.NewConfig()
+	config.Region = aws.String(endpoints.UsEast1RegionID)
+	return config
 }
 
 func GetSession() *session.Session {
-	sess, sessErr := session.NewSession(GetConfig())
-	if sessErr != nil {
-		log.Panicf("Session error: %s", sessErr.Error())
-	}
-	return sess
+	return session.Must(session.NewSession(GetConfig()))
 }
 
 func LogAwsError(err error) {
